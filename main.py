@@ -1,12 +1,13 @@
 import openai
 import pyttsx3 as tts
 import speech_recognition
+import config 
 
 
-openai.api_key = "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"
+openai.api_key = config.configDict["key"]
 engine = tts.init()
 voices = engine.getProperty('voices')
-engine.setProperty('voice',voices[10].id) # 10 für dietpi; 0 für test rechner
+engine.setProperty('voice',voices[config.configDict["voice"]].id) # 10 für dietpi; 0 für test rechner
 
 # Set up the OpenAI Playgroundhttps://beta.openai.com/playground/
 openai.api_base = "https://api.openai.com/v1"
