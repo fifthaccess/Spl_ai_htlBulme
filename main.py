@@ -24,7 +24,7 @@ while True:
         max_tokens=3500,
         n=1,
         stop=None,
-        temperature=0.5,
+        temperature=0.1,
     )
 
 
