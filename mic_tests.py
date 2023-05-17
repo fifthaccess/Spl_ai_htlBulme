@@ -6,3 +6,4 @@ with sr.Microphone() as source:
     voice = listner.listen(source)
     command = listner.recognize_google(voice, language= 'de-at')
     print(command)
+    
