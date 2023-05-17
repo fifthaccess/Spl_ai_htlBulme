@@ -12,11 +12,15 @@ engine.setProperty('voice',voices[config.configDict["voice"]].id) # 10 für diet
 # Set up the OpenAI Playgroundhttps://beta.openai.com/playground/
 openai.api_base = "https://api.openai.com/v1"
 
-
+#TODO implementiere erkennung auf Athena/name 
 prompt = "schrieb mir einen kurzen deutsch text auf deutsch"
 while True:
-    prompt = input()
 
+    prompt = input()
+    if not("?" in prompt):
+        prompt = prompt + "?"
+
+    print("prompt: '" + prompt + "'")
 
     response = openai.Completion.create(
         engine="text-davinci-002",
@@ -29,5 +33,6 @@ while True:
 
 
     print(response.choices[0].text)
-    engine.say("chat GPT sagt:"+ response.choices[0].text )
-    engine.runAndWait()
+    #TODO maybe logfiles schreiben 
+    #engine.say("chat GPT sagt:"+ response.choices[0].text )
+    #engine.runAndWait()
