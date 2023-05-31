@@ -34,5 +34,5 @@ while True:
 
     print(response.choices[0].text)
     #TODO maybe logfiles schreiben 
-    #engine.say("chat GPT sagt:"+ response.choices[0].text )
-    #engine.runAndWait()
+    engine.say("chat GPT sagt:"+ response.choices[0].text )
+    engine.runAndWait()
