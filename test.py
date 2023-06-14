@@ -17,7 +17,7 @@ class AiBot:
         self.mqtt_client = mqtt.Client()
         self.mqtt_client.on_connect = self.on_connect
 
-        self.mqtt_client.connect(self.IPAddr, 1883, 60) # "172.16.119.10"
+        self.mqtt_client.connect(self.IPAddr, 1883, 60) # 
 
         voices = self._engine.getProperty('voices')
         self._engine.setProperty('voice',voices[config.configDict["voice"]].id) # 10 für dietpi; 0 für test rechner
@@ -43,13 +43,16 @@ class AiBot:
         self._answer(response= response.choices[0].text)
         
     def LED(self, prompt):
+        print(prompt)
         if ("licht" in prompt and "ein" in prompt) :
             self.mqtt_client.publish('LED', payload=1 , qos=0, retain=False)
             self._answer("LED ein")
+            self._termianl_answer("LED ein")
 
         if ("licht" in prompt and "aus" in prompt):
             self.mqtt_client.publish('LED', payload=0 , qos=0, retain=False)
             self._answer("LED aus")
+            self._termianl_answer("LED aus")
 
 
     def _answer(self, response):
@@ -66,11 +69,15 @@ myAI = AiBot()
 
 while True:
     
-    with sr.Microphone(device_index=2) as source:
+    with sr.Microphone(device_index=0) as source:
         print("listening: ")
         listner = sr.Recognizer()
         voice = listner.listen(source)
-        text = listner.recognize_google(voice, language= 'de-at')#, show_all=True
+        try:
+            text = listner.recognize_google(voice, language= 'de-at')#, show_all=True
+        except UnknownValueError:
+            pass
+
         #print(command)
 
         #text = input()
