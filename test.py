@@ -1,6 +1,6 @@
 import openai
 import pyttsx3 as tts
-import speech_recognition
+import speech_recognition as sr
 import config 
 import paho.mqtt.client  as mqtt 
 import socket
@@ -65,9 +65,17 @@ class AiBot:
 myAI = AiBot()
 
 while True:
-    text = input()
-    if ("Athena" in text):
-        if ("led" in text.lower()):
-            myAI.LED(text.lower())
-        else:
-            myAI.gererateRespose(text)
+    
+    with sr.Microphone(device_index=2) as source:
+        print("listening: ")
+        listner = sr.Recognizer()
+        voice = listner.listen(source)
+        text = listner.recognize_google(voice, language= 'de-at')#, show_all=True
+        #print(command)
+
+        #text = input()
+        if ("Athena" in text):
+            if ("led" in text.lower()):
+                myAI.LED(text.lower())
+            else:
+                myAI.gererateRespose(text)
