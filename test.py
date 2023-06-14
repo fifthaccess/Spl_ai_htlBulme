@@ -69,18 +69,18 @@ myAI = AiBot()
 
 while True:
     
-    with sr.Microphone(device_index=config.configDict["device"]) as source:
-        print("listening: ")
-        listner = sr.Recognizer()
-        voice = listner.listen(source)
-        try:
-            text = listner.recognize_google(voice, language= 'de-at')#, show_all=True
-        except sr.exceptions.UnknownValueError:
-            pass
+    # with sr.Microphone(device_index=config.configDict["device"]) as source:
+    #     print("listening: ")
+    #     listner = sr.Recognizer()
+    #     voice = listner.listen(source)
+    #     try:
+    #         text = listner.recognize_google(voice, language= 'de-at')#, show_all=True
+    #     except sr.exceptions.UnknownValueError:
+    #         pass
 
         #print(command)
 
-        #text = input()
+        text = input()
       #  if ("Athena" in text):
         if ("led" in text.lower()):
             myAI.LED(text.lower())
