@@ -69,7 +69,7 @@ myAI = AiBot()
 
 while True:
     
-    with sr.Microphone(device_index=0) as source:
+    with sr.Microphone(device_index=2) as source:
         print("listening: ")
         listner = sr.Recognizer()
         voice = listner.listen(source)
