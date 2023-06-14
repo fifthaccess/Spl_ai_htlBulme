@@ -7,10 +7,11 @@ def on_connect(client, userdata, flags, rc):
 myclient = mqtt.Client()
 myclient.on_connect = on_connect
 myclient.connect("172.16.119.10", 1883, 60)
-for i in range(3):
-    myclient.publish('testTopic', payload="Hello World", qos=0, retain=False)# schickt ab pyload = message 
-    print(f"send {i} to a/b")
-    time.sleep(1)
-
-
+for i in range(50):
+    myclient.publish('testTopic', payload=1 , qos=0, retain=False)# schickt ab pyload = message 
+    print("send 1 to a/b")
+    time.sleep(3)
+    myclient.publish('testTopic', payload=0 , qos=0, retain=False)# schickt ab pyload = message 
+    print("send 0 to a/b")
+    time.sleep(3)
 myclient.loop_forever()
