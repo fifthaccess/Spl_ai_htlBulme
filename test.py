@@ -69,13 +69,13 @@ myAI = AiBot()
 
 while True:
     
-    with sr.Microphone(device_index=2) as source:
+    with sr.Microphone(device_index=config.configDict["device"]) as source:
         print("listening: ")
         listner = sr.Recognizer()
         voice = listner.listen(source)
         try:
             text = listner.recognize_google(voice, language= 'de-at')#, show_all=True
-        except UnknownValueError:
+        except speech_recognition.exceptions.UnknownValueError:
             pass
 
         #print(command)
