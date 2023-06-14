@@ -86,3 +86,5 @@ while True:
                 myAI.LED(text.lower())
             else:
                 myAI.gererateRespose(text)
+        else:
+            print(text)
