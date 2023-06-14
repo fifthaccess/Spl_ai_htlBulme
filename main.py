@@ -1,6 +1,6 @@
 import openai
 import pyttsx3 as tts
-import speech_recognition
+import speech_recognition as sr
 import config 
 
 
