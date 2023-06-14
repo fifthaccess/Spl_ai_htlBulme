@@ -81,10 +81,10 @@ while True:
         #print(command)
 
         #text = input()
-        if ("Athena" in text):
-            if ("led" in text.lower()):
-                myAI.LED(text.lower())
-            else:
-                myAI.gererateRespose(text)
+      #  if ("Athena" in text):
+        if ("led" in text.lower()):
+            myAI.LED(text.lower())
         else:
-            print(text)
+            myAI.gererateRespose(text)
+      #  else:
+        print(text)
