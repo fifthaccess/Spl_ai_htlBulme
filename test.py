@@ -75,7 +75,7 @@ while True:
         voice = listner.listen(source)
         try:
             text = listner.recognize_google(voice, language= 'de-at')#, show_all=True
-        except speech_recognition.exceptions.UnknownValueError:
+        except sr.exceptions.UnknownValueError:
             pass
 
         #print(command)
