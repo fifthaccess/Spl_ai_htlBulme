@@ -1,0 +1,7 @@
+sudo apt-get install alsa-utils
+apt install lshw
+apt install pciutils
+apt install espeak
+apt-get install git
+sudo apt install pulseaudio
+apt install netst
