@@ -91,7 +91,7 @@ while True:
             myAI.gererateRespose(text)
       #  else:
 
-        audio = sr.AudioFile("LED_Aus.wav")
+        audio = sr.AudioFile("LED_AUS.wav")
 
     time.sleep(3)
     with audio as source:
