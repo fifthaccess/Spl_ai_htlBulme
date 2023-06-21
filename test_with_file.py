@@ -4,7 +4,7 @@ import speech_recognition as sr
 import config 
 import paho.mqtt.client  as mqtt 
 import socket
-
+import time
 class AiBot: 
     def __init__(self):
         hostname=socket.gethostname()   
@@ -16,7 +16,7 @@ class AiBot:
 
         self.mqtt_client = mqtt.Client()
         self.mqtt_client.on_connect = self.on_connect
-
+        
         self.mqtt_client.connect(self.IPAddr, 1883, 60) # 
 
         voices = self._engine.getProperty('voices')
@@ -72,7 +72,7 @@ while True:
     #with sr.Microphone(device_index=config.configDict["device"]) as source
     print("listening: ")
     listner = sr.Recognizer()
-    audio = listner.audiofile("speech.mp3")
+    audio = sr.AudioFile("LED_EIN.wav")
     with audio as source:
         audio = listner.record(source)
         try:
@@ -81,7 +81,7 @@ while True:
         except sr.exceptions.UnknownValueError:
             pass
 
-        #print(command)
+        print(text)
 
         #text = input()
       #  if ("Athena" in text):
@@ -90,4 +90,24 @@ while True:
         else:
             myAI.gererateRespose(text)
       #  else:
+
+        audio = sr.AudioFile("LED_Aus.wav")
+
+    time.sleep(3)
+    with audio as source:
+        audio = listner.record(source)
+        try:
+
+            text = listner.recognize_google(audio, language= 'de-at')#, show_all=True
+        except sr.exceptions.UnknownValueError:
+            pass
+
+        if ("led" in text.lower()):
+            myAI.LED(text.lower())
+        else:
+            myAI.gererateRespose(text)
+      #  else:
         print(text)
+    time.sleep(3)
+
+        
