@@ -1,10 +1,10 @@
 import speech_recognition as sr
 import pyaudio 
+import config 
 
 
 
-
-with sr.Microphone(device_index=2) as source:
+with sr.Microphone(device_index=config.configDict["device"]) as source:
     print("listening: ")
     listner = sr.Recognizer()
     voice = listner.listen(source)
