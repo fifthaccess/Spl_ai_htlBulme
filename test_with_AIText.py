@@ -6,9 +6,11 @@ import paho.mqtt.client  as mqtt
 import socket
 import sounddevice as sd
 from scipy.io.wavfile import write
+import logging
 
 class AiBot: 
     def __init__(self):
+        logging.basicConfig(filemode = 'a', filename='example.log',level=logging.INFO, encoding='utf-8', format='%(asctime)s %(message)s')
         hostname=socket.gethostname()   
         self.IPAddr=socket.gethostbyname(hostname)   
 
@@ -18,8 +20,7 @@ class AiBot:
 
         self.mqtt_client = mqtt.Client()
         self.mqtt_client.on_connect = self.on_connect
-
-        self.mqtt_client.connect(self.IPAddr, 1883, 60) 
+        #self.mqtt_client.connect(self.IPAddr, 1883, 60) 
 
         voices = self._engine.getProperty('voices')
         self._engine.setProperty('voice',voices[config.configDict["voice"]].id) # 10 für dietpi; 0 für test rechner
@@ -34,7 +35,7 @@ class AiBot:
         print(prompt)
             
         response = openai.Completion.create(
-            
+
         engine="text-davinci-002",
         prompt=prompt,
         max_tokens=3500,
@@ -83,7 +84,7 @@ class AiBot:
 
         print(transcript["text"])
 
-        response = openai.Completion.create(
+        input_text = openai.Completion.create(
                 engine="text-davinci-002",
                 prompt="Übersetzte nach deutsch:" + transcript["text"],
                 max_tokens=3500,
@@ -91,15 +92,20 @@ class AiBot:
                 stop=None,
                 temperature=0.1,
                 )
-        response = response.choices[0].text
-        print(response)
-        return response
         
-    def decide_answer(self,response):
-            if ("led" in response.lower()):
-               myAI.LED(response.lower())
+        input_text = input_text.choices[0].text
+        input_text = input_text.replace("\n","")
+
+        print(input_text)
+        if (not (input_text == "")): 
+            logging.info('Received this: '+ input_text)
+        return input_text
+        
+    def decide_answer(self,input_text):
+            if ("led" in input_text.lower()):
+               myAI.LED(input_text.lower())
             else:
-                myAI.gererateRespose(response)
+                myAI.gererateRespose(input_text)
 
 
 myAI = AiBot()
