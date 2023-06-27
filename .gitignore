@@ -6,3 +6,6 @@ __pycache__
 delete.py
 *.wav
 *.mp3
+venv
+static
+*.log
