@@ -8,4 +8,5 @@ delete.py
 *.mp3
 venv
 static
-*.log
+*.log*
+example.log
